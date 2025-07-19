@@ -28,7 +28,7 @@ CodeMonk_Task/
 ├── streamlit_app.py                      # Streamlit GUI
 ├── requirements.txt                      # Python dependencies
 ├── amazon_samples/                       # (Optional) Sample images for testing
-└── screenshots/                          # Demo screenshots
+└── Amazon sample/                          # Demo screenshots
 ```
 
 ## Setup Instructions
@@ -39,7 +39,7 @@ CodeMonk_Task/
    pip install -r requirements.txt
    ```
 3. **Download the trained model and encoders**
-   - Download `best_model.pth`, `le_colour.pkl`, `le_product_type.pkl`, `le_season.pkl`, `le_gender.pkl` from the [GitHub release](YOUR_RELEASE_LINK).
+   - Download `best_model.pth`, `le_colour.pkl`, `le_product_type.pkl`, `le_season.pkl`, `le_gender.pkl` from the Pkl files
    - Place them in the project root directory.
 
 4. **Run the notebook**
@@ -81,9 +81,9 @@ Below are sample predictions from the Streamlit app using real Amazon fashion pr
 
 | Uploaded Image | Predicted Color | Predicted Product Type | Predicted Season | Predicted Gender |
 |:--------------:|:---------------:|:---------------------:|:----------------:|:----------------:|
-| ![Blue Tshirt](screenshots/blue_tshirt.png) | Blue | Tshirts | Summer | Men |
-| ![Orange Kurta](screenshots/orange_kurta.png) | Orange | Kurtas | Fall | Women |
-| ![Green Dress](screenshots/green_dress.png) | Green | Nightdress | Summer | Women |
+| ![Blue Tshirt](Amazon sample/blue_men.png) | Blue | Tshirts | Summer | Men |
+| ![Orange Kurta](Amazon sample/orange.png) | Orange | Kurtas | Fall | Women |
+| ![Green Dress](Amazon sample/GREEN_women.png) | Green | Nightdress | Summer | Women |
 
 **JSON Output Example:**
 ```json
@@ -101,12 +101,5 @@ Below are sample predictions from the Streamlit app using real Amazon fashion pr
 - 🌤️ Season: Summer
 - 👤 Gender: Men
 
-## Model Performance
-
-- **Color Accuracy:** 80%+
-- **Product Type Accuracy:** 85%+
-- **Season Accuracy:** 75%+
-- **Gender Accuracy:** 90%+
-
 ## Author
-[Your Name] - Codemonk ML Intern Assignment 
+[Dongala Venkatesh] - Codemonk ML Intern Assignment 
