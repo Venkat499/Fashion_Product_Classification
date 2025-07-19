@@ -14,26 +14,7 @@ The model predicts:
 - FastAPI endpoint for inference
 - Streamlit GUI for demo
 
-## Project Structure
-```
-CodeMonk_Task/
-├── Fashion_Product_Classification.ipynb   # Main notebook (EDA, training, evaluation)
-├── model.py                              # Model definition
-├── best_model.pth                        # Trained model weights
-├── le_colour.pkl                         # Color label encoder
-├── le_product_type.pkl                   # Product type label encoder
-├── le_season.pkl                         # Season label encoder
-├── le_gender.pkl                         # Gender label encoder
-├── api_inference.py                      # FastAPI server
-├── streamlit_app.py                      # Streamlit GUI
-├── requirements.txt                      # Python dependencies
-├── amazon_samples/                       # (Optional) Sample images for testing
-└── Amazon sample/                          # Demo screenshots
-```
-
 ## Setup Instructions
-
-# Fashion Product Classification
 
 This project provides a complete pipeline for fashion product classification using deep learning. It includes:
 - Model training and evaluation (Jupyter notebook)
