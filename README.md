@@ -1,114 +1,147 @@
-# Fashion Product Multi-Label Classification
+Fashion Product Multi-Label Classification
+This project uses a ResNet50 deep learning model to perform multi-label classification on fashion product images. Given an image, the model can identify its Product Type, Color, Season, and Gender. It includes a Streamlit web app for interactive demos and a Flask API for programmatic use.
 
-## Overview
-This project demonstrates multi-label classification of fashion product images using deep learning (ResNet50).  
-The model predicts:
-- **Color**
-- **Product Type** (e.g., Tshirts, Shoes, etc.)
-- **Season**
-- **Gender**
+Demo
+Here are some sample predictions made by the application:
 
-## Features
-- PyTorch-based multi-output model
-- Trained on the Kaggle Fashion Product Images Dataset
-- FastAPI endpoint for inference
-- Streamlit GUI for demo
+Uploaded Image
 
-## Setup Instructions
+Predicted Color
 
-This project provides a complete pipeline for fashion product classification using deep learning. It includes:
-- Model training and evaluation (Jupyter notebook)
-- FastAPI backend for model inference
-- Streamlit frontend for interactive predictions
-- Pre-trained model and encoders for immediate deployment
+Predicted Product Type
 
-## 🚀 How to Run This Project
+Predicted Season
 
-### 1. Clone the Repository
-```sh
+Predicted Gender
+
+<img src="https://raw.githubusercontent.com/Venkat499/Fashion_Product_Classification/main/Amazon%20sample/blue_men.png" width="150">
+
+Blue
+
+Tshirts
+
+Summer
+
+Men
+
+<img src="https://raw.githubusercontent.com/Venkat499/Fashion_Product_Classification/main/Amazon%20sample/orange.png" width="150">
+
+Orange
+
+Kurtas
+
+Fall
+
+Women
+
+<img src="https://raw.githubusercontent.com/Venkat499/Fashion_Product_Classification/main/Amazon%20sample/GREEN_women.png" width="150">
+
+Green
+
+Nightdress
+
+Summer
+
+Women
+
+Features
+Multi-Output Model: A single PyTorch model that predicts four different attributes.
+
+Interactive Demo: A user-friendly Streamlit GUI to test the model with your own images.
+
+REST API: A Flask endpoint for easy integration into other applications.
+
+Complete Training Pipeline: A Jupyter Notebook is provided detailing the data preprocessing, model training, and evaluation.
+
+Project Structure
+.
+├── API & Streamlit/
+│   ├── api_inference.py        # Flask API for model inference
+│   ├── streamlit_app.py        # Main Streamlit application file
+│   ├── model.py                # Python script defining the model architecture
+│   ├── le_colour.pkl           # Label encoder for color
+│   ├── le_gender.pkl           # Label encoder for gender
+│   ├── le_product_type.pkl     # Label encoder for product type
+│   └── le_season.pkl           # Label encoder for season
+│
+├── Amazon sample/
+│   └── ...                     # Sample images for testing
+│
+├── Jupyter File/
+│   └── Fashion_Product_Classification.ipynb # Notebook with training code
+│
+├── best_model.pth              # Trained PyTorch model weights (Download from Releases)
+└── README.md                   # This file
+
+Getting Started
+Follow these steps to set up and run the project on your local machine.
+
+1. Prerequisites
+Python 3.7+
+
+pip and venv
+
+2. Clone the Repository
 git clone https://github.com/Venkat499/Fashion_Product_Classification.git
 cd Fashion_Product_Classification
-```
 
-### 2. Install Dependencies
-Make sure you have Python 3.7+ installed.
-```sh
-pip install -r requirements.txt
-```
+3. Set Up Virtual Environment & Install Dependencies
+# Create and activate a virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-### 3. Project Structure
-- `API & Streamlit/` — Contains the API and Streamlit app scripts.
-- `Jupyter File/` — Jupyter notebook for model training and exploration.
-- `pkl file/` — Pre-trained model and label encoders.
-- `Amazon sample/` — Sample images for testing.
+# Install required packages
+pip install torch torchvision streamlit Pillow numpy scikit-learn flask
 
-### 4. Run the FastAPI Inference API
-```sh
+4. Download Model Weights
+Download the best_model.pth file from the v1.0 Release on GitHub and place it in the root directory of the project.
+
+Usage
+You can interact with the model through the Streamlit app or the Flask API.
+
+Option A: Run the Streamlit App (Interactive Demo)
+This is the easiest way to test the project.
+
+# Navigate to the app directory
 cd "API & Streamlit"
-uvicorn api_inference:app --reload
-```
-- The API will be available at: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
-### 5. Run the Streamlit App
-```sh
-cd "API & Streamlit"
+# Run the app
 streamlit run streamlit_app.py
-```
-- The web app will open in your browser.
 
-### 6. (Optional) Explore the Jupyter Notebook
-Open `Jupyter File/Fashion_Product_Classification.ipynb` in Jupyter Notebook or JupyterLab to see model training and analysis.
+Your browser will open to the application's interface.
 
----
+Option B: Run the Flask API
+Use the API for programmatic access.
 
-**Note:**
-- Ensure the `.pth` and `.pkl` files in the `pkl file/` directory are present, as they are required for inference.
-- If you have any issues, please check the Python version and that all dependencies are installed.
+# Navigate to the app directory
+cd "API & Streamlit"
 
----
+# Start the Flask server
+python api_inference.py
 
-## Features
-- Predicts product type, color, gender, and season from fashion images.
-- Easy-to-use API and web interface.
-- Visualization and analysis tools in the notebook.
+The API will be available at http://127.0.0.1:5000. You can send a POST request with an image file to the /predict endpoint to get a JSON response.
 
----
-- **Backbone:** ResNet50 (pretrained on ImageNet)
-- **Image Size:** 224x224
-- **Augmentation:** ColorJitter, RandomFlip, RandomRotation
-- **Loss:** Weighted CrossEntropy (higher weight for color)
-- **Framework:** PyTorch
+Example curl request:
 
-## Dataset
+curl -X POST -F "file=@/path/to/your/image.jpg" http://127.0.0.1:5000/predict
 
-- [Kaggle Fashion Product Images Dataset](https://www.kaggle.com/datasets/paramaggarwal/fashion-product-images-dataset)
-- ~44,000 images with labels for color, product type, season, and gender
+Example JSON Output:
 
-## Demo Results
-
-Below are sample predictions from the Streamlit app using real Amazon fashion product images:
-
-| Uploaded Image | Predicted Color | Predicted Product Type | Predicted Season | Predicted Gender |
-|:--------------:|:---------------:|:---------------------:|:----------------:|:----------------:|
-| ![Blue Tshirt](Amazon sample/blue_men.png) | Blue | Tshirts | Summer | Men |
-| ![Orange Kurta](Amazon sample/orange.png) | Orange | Kurtas | Fall | Women |
-| ![Green Dress](Amazon sample/GREEN_women.png) | Green | Nightdress | Summer | Women |
-
-**JSON Output Example:**
-```json
 {
   "colour": "Blue",
+  "gender": "Men",
   "product_type": "Tshirts",
-  "season": "Summer",
-  "gender": "Men"
+  "season": "Summer"
 }
-```
 
-**Summary Output Example:**
-- 🎨 Color: Blue
-- 👕 Product Type: Tshirts
-- 🌤️ Season: Summer
-- 👤 Gender: Men
+Model Details
+Architecture: ResNet50 (pretrained on ImageNet)
 
-## Author
-[Dongala Venkatesh] - Codemonk ML Intern Assignment 
+Framework: PyTorch
+
+Image Size: 224x224 pixels
+
+Data Augmentation: ColorJitter, Random Horizontal Flip, Random Rotation.
+
+Dataset
+This model was trained on the Fashion Product Images Dataset available on Kaggle, which contains over 44,000 labeled images.
