@@ -1,59 +1,25 @@
-Fashion Product Multi-Label Classification
-This project uses a ResNet50 deep learning model to perform multi-label classification on fashion product images. Given an image, the model can identify its Product Type, Color, Season, and Gender. It includes a Streamlit web app for interactive demos and a Flask API for programmatic use.
+# Fashion Product Multi-Label Classification
 
-Demo
+This project uses a ResNet50 deep learning model to perform multi-label classification on fashion product images. Given an image, the model can identify its **Product Type**, **Color**, **Season**, and **Gender**. It includes a Streamlit web app for interactive demos and a Flask API for programmatic use.
+
+## Demo
+
 Here are some sample predictions made by the application:
 
-Uploaded Image
+| Uploaded Image | Predicted Color | Predicted Product Type | Predicted Season | Predicted Gender |
+|:--------------:|:---------------:|:----------------------:|:----------------:|:----------------:|
+| <img src="https://raw.githubusercontent.com/Venkat499/Fashion_Product_Classification/main/Amazon%20sample/blue_men.png" width="150"> | Blue | Tshirts | Summer | Men |
+| <img src="https://raw.githubusercontent.com/Venkat499/Fashion_Product_Classification/main/Amazon%20sample/orange.png" width="150"> | Orange | Kurtas | Fall | Women |
+| <img src="https://raw.githubusercontent.com/Venkat499/Fashion_Product_Classification/main/Amazon%20sample/GREEN_women.png" width="150"> | Green | Nightdress | Summer | Women |
 
-Predicted Color
+## Features
+- **Multi-Output Model:** A single PyTorch model that predicts four different attributes.
+- **Interactive Demo:** A user-friendly Streamlit GUI to test the model with your own images.
+- **REST API:** A Flask endpoint for easy integration into other applications.
+- **Complete Training Pipeline:** A Jupyter Notebook is provided detailing the data preprocessing, model training, and evaluation.
 
-Predicted Product Type
-
-Predicted Season
-
-Predicted Gender
-
-<img src="https://raw.githubusercontent.com/Venkat499/Fashion_Product_Classification/main/Amazon%20sample/blue_men.png" width="150">
-
-Blue
-
-Tshirts
-
-Summer
-
-Men
-
-<img src="https://raw.githubusercontent.com/Venkat499/Fashion_Product_Classification/main/Amazon%20sample/orange.png" width="150">
-
-Orange
-
-Kurtas
-
-Fall
-
-Women
-
-<img src="https://raw.githubusercontent.com/Venkat499/Fashion_Product_Classification/main/Amazon%20sample/GREEN_women.png" width="150">
-
-Green
-
-Nightdress
-
-Summer
-
-Women
-
-Features
-Multi-Output Model: A single PyTorch model that predicts four different attributes.
-
-Interactive Demo: A user-friendly Streamlit GUI to test the model with your own images.
-
-REST API: A Flask endpoint for easy integration into other applications.
-
-Complete Training Pipeline: A Jupyter Notebook is provided detailing the data preprocessing, model training, and evaluation.
-
-Project Structure
+## Project Structure
+```
 .
 ├── API & Streamlit/
 │   ├── api_inference.py        # Flask API for model inference
@@ -72,76 +38,81 @@ Project Structure
 │
 ├── best_model.pth              # Trained PyTorch model weights (Download from Releases)
 └── README.md                   # This file
+```
 
-Getting Started
+## Getting Started
+
 Follow these steps to set up and run the project on your local machine.
 
-1. Prerequisites
-Python 3.7+
+### 1. Prerequisites
+- Python 3.7+
+- `pip` and `venv`
 
-pip and venv
-
-2. Clone the Repository
-git clone https://github.com/Venkat499/Fashion_Product_Classification.git
+### 2. Clone the Repository
+```bash
+git clone [https://github.com/Venkat499/Fashion_Product_Classification.git](https://github.com/Venkat499/Fashion_Product_Classification.git)
 cd Fashion_Product_Classification
+```
 
-3. Set Up Virtual Environment & Install Dependencies
+### 3. Set Up Virtual Environment & Install Dependencies
+```bash
 # Create and activate a virtual environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install required packages
 pip install torch torchvision streamlit Pillow numpy scikit-learn flask
+```
 
-4. Download Model Weights
-Download the best_model.pth file from the v1.0 Release on GitHub and place it in the root directory of the project.
+### 4. Download Model Weights
+Download the `best_model.pth` file from the [v1.0 Release on GitHub](https://github.com/Venkat499/Fashion_Product_Classification/releases/tag/codemonk_1.1) and place it in the root directory of the project.
 
-Usage
+## Usage
+
 You can interact with the model through the Streamlit app or the Flask API.
 
-Option A: Run the Streamlit App (Interactive Demo)
+### Option A: Run the Streamlit App (Interactive Demo)
 This is the easiest way to test the project.
-
+```bash
 # Navigate to the app directory
 cd "API & Streamlit"
 
 # Run the app
 streamlit run streamlit_app.py
-
+```
 Your browser will open to the application's interface.
 
-Option B: Run the Flask API
+### Option B: Run the Flask API
 Use the API for programmatic access.
-
+```bash
 # Navigate to the app directory
 cd "API & Streamlit"
 
 # Start the Flask server
 python api_inference.py
+```
+The API will be available at `http://127.0.0.1:5000`. You can send a POST request with an image file to the `/predict` endpoint to get a JSON response.
 
-The API will be available at http://127.0.0.1:5000. You can send a POST request with an image file to the /predict endpoint to get a JSON response.
+**Example `curl` request:**
+```bash
+curl -X POST -F "file=@/path/to/your/image.jpg" [http://127.0.0.1:5000/predict](http://127.0.0.1:5000/predict)
+```
 
-Example curl request:
-
-curl -X POST -F "file=@/path/to/your/image.jpg" http://127.0.0.1:5000/predict
-
-Example JSON Output:
-
+**Example JSON Output:**
+```json
 {
   "colour": "Blue",
   "gender": "Men",
   "product_type": "Tshirts",
   "season": "Summer"
 }
+```
 
-Model Details
-Architecture: ResNet50 (pretrained on ImageNet)
+## Model Details
+- **Architecture:** ResNet50 (pretrained on ImageNet)
+- **Framework:** PyTorch
+- **Image Size:** 224x224 pixels
+- **Data Augmentation:** ColorJitter, Random Horizontal Flip, Random Rotation.
 
-Framework: PyTorch
-
-Image Size: 224x224 pixels
-
-Data Augmentation: ColorJitter, Random Horizontal Flip, Random Rotation.
-
-Dataset
-This model was trained on the Fashion Product Images Dataset available on Kaggle, which contains over 44,000 labeled images.
+## Dataset
+This model was trained on the **Fashion Product Images Dataset** available on [Kaggle](https://www.kaggle.com/datasets/paramaggarwal/fashion-product-images-dataset), which contains over 44,000 labeled images.
