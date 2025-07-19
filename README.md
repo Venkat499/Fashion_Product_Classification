@@ -33,37 +33,65 @@ CodeMonk_Task/
 
 ## Setup Instructions
 
-1. **Clone the repository**
-2. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. **Download the trained model and encoders**
-   - Download `best_model.pth`, `le_colour.pkl`, `le_product_type.pkl`, `le_season.pkl`, `le_gender.pkl` from the Pkl files
-   - Place them in the project root directory.
+# Fashion Product Classification
 
-4. **Run the notebook**
-   - Open `Fashion_Product_Classification.ipynb` in Jupyter/Kaggle/Colab
-   - Run all cells in order
+This project provides a complete pipeline for fashion product classification using deep learning. It includes:
+- Model training and evaluation (Jupyter notebook)
+- FastAPI backend for model inference
+- Streamlit frontend for interactive predictions
+- Pre-trained model and encoders for immediate deployment
 
-5. **Run the API**
-   ```bash
-   python api_inference.py
-   # Visit http://localhost:8000/docs
-   ```
+## 🚀 How to Run This Project
 
-6. **Run the Streamlit app**
-   ```bash
-   streamlit run streamlit_app.py
-   ```
+### 1. Clone the Repository
+```sh
+git clone https://github.com/Venkat499/Fashion_Product_Classification.git
+cd Fashion_Product_Classification
+```
 
-## Usage
+### 2. Install Dependencies
+Make sure you have Python 3.7+ installed.
+```sh
+pip install -r requirements.txt
+```
 
-- **API:** Upload an image to `/predict/` endpoint to get predictions.
-- **Streamlit:** Use the web interface to upload images and view predictions.
+### 3. Project Structure
+- `API & Streamlit/` — Contains the API and Streamlit app scripts.
+- `Jupyter File/` — Jupyter notebook for model training and exploration.
+- `pkl file/` — Pre-trained model and label encoders.
+- `Amazon sample/` — Sample images for testing.
 
-## Model Details
+### 4. Run the FastAPI Inference API
+```sh
+cd "API & Streamlit"
+uvicorn api_inference:app --reload
+```
+- The API will be available at: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
+### 5. Run the Streamlit App
+```sh
+cd "API & Streamlit"
+streamlit run streamlit_app.py
+```
+- The web app will open in your browser.
+
+### 6. (Optional) Explore the Jupyter Notebook
+Open `Jupyter File/Fashion_Product_Classification.ipynb` in Jupyter Notebook or JupyterLab to see model training and analysis.
+
+---
+
+**Note:**
+- Ensure the `.pth` and `.pkl` files in the `pkl file/` directory are present, as they are required for inference.
+- If you have any issues, please check the Python version and that all dependencies are installed.
+
+---
+
+## Features
+- Predicts product type, color, gender, and season from fashion images.
+- Easy-to-use API and web interface.
+- Visualization and analysis tools in the notebook.
+
+---
 - **Backbone:** ResNet50 (pretrained on ImageNet)
 - **Image Size:** 224x224
 - **Augmentation:** ColorJitter, RandomFlip, RandomRotation
